@@ -63,6 +63,19 @@
             max-height: 40vh;
             overflow-x: auto;
         }
+
+        .copy-icon {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .copy-icon:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -71,6 +84,7 @@
         <textarea id="inputUrls" placeholder="" onpaste="handlePaste(event)"></textarea>
         <button onclick="processUrls()">处理网址</button>
         <div class="output" id="output"></div>
+        <button class="copy-icon" onclick="copyOutput()">复制</button>
     </div>
 
     <script>
@@ -98,6 +112,16 @@
             });
 
             document.getElementById("output").textContent = outputText;
+        }
+
+        function copyOutput() {
+            const outputContent = document.getElementById("output").textContent.trim();
+            const tempTextarea = document.createElement("textarea");
+            tempTextarea.value = outputContent;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextarea);
         }
     </script>
 </body>
